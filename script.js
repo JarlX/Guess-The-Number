@@ -14,7 +14,7 @@ let secretnumber = Math.trunc(Math.random() * 20) + 1; // trunc ondalık ifadeyi
 let score = 20;
 let bestscore = 0;
 
-const displayMessage = function (message, number, highscore, score) {
+const displayMessage = function (message) {
   document.querySelector('.message').textContent = message;
 };
 
