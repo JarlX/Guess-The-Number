@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // console.log(document.querySelector('.message').textContent);
 
@@ -14,52 +14,57 @@ let secretnumber = Math.trunc(Math.random() * 20) + 1; // trunc ondalık ifadeyi
 let score = 20;
 let bestscore = 0;
 
-document.querySelector(".check").addEventListener("click", function () {
-  const guess = Number(document.querySelector(".guess").value);
+const displayMessage = function (message, number, highscore, score) {
+  document.querySelector('.message').textContent = message;
+};
+
+document.querySelector('.check').addEventListener('click', function () {
+  const guess = Number(document.querySelector('.guess').value);
 
   if (!guess) {
-    document.querySelector(".message").textContent = "Sayı girmediniz!";
+    displayMessage('Sayı girmediniz!');
   } else if (guess === secretnumber) {
-    document.querySelector(".message").textContent = "🥳 Tebrikler!";
-    document.querySelector(".number").textContent = secretnumber;
+    displayMessage('🥳 Tebrikler!');
+    document.querySelector('.number').textContent = secretnumber;
 
-    document.querySelector("body").style.backgroundColor = "#60b347";
-    document.querySelector(".number").style.width = "30rem";
+    document.querySelector('body').style.backgroundColor = '#60b347';
+    document.querySelector('.number').style.width = '30rem';
 
-    document.querySelector(".check").ariaDisabled = true;
-    document.querySelector(".check").style.backgroundColor = "#ccc";
+    document.querySelector('.check').ariaDisabled = true;
+    document.querySelector('.check').style.backgroundColor = '#ccc';
 
     if (score > bestscore) {
       bestscore = score;
-      document.querySelector(".highscore").textContent = bestscore;
+      document.querySelector('.highscore').textContent = bestscore;
     }
   } else if (guess !== secretnumber) {
     if (score > 1) {
-      document.querySelector(".message").textContent =
+      displayMessage(
         guess > secretnumber
-          ? "❕ Yüksek sayı girdiniz!"
-          : "❕ Düşük sayı girdiniz!";
+          ? '❕ Yüksek sayı girdiniz!'
+          : '❕ Düşük sayı girdiniz!'
+      ); //Turney operator
       score--;
-      document.querySelector(".score").textContent = score;
+      document.querySelector('.score').textContent = score;
     } else {
-      document.querySelector(".message").textContent = "Kaybettiniz!";
-      document.querySelector(".score").textContent = 0;
-      document.querySelector("body").style.backgroundColor = "#ff0000";
+      displayMessage('Kaybettiniz!');
+      document.querySelector('.score').textContent = 0;
+      document.querySelector('body').style.backgroundColor = '#ff0000';
     }
   }
 });
 
-document.querySelector(".again").addEventListener("click", function () {
+document.querySelector('.again').addEventListener('click', function () {
   score = 20;
   bestscore = bestscore;
   secretnumber = Math.trunc(Math.random() * 20) + 1;
-  document.querySelector(".message").textContent = "Tahmin etmeye başla..";
-  document.querySelector(".guess").value = "";
-  document.querySelector(".score").textContent = score;
-  document.querySelector(".highscore").textContent = bestscore;
-  document.querySelector("body").style.backgroundColor = "#222";
-  document.querySelector(".number").style.width = "15rem";
-  document.querySelector(".check").ariaDisabled = false;
-  document.querySelector(".check").style.backgroundColor = "#eee";
-  document.querySelector(".number").textContent = "?";
+  displayMessage('Tahmin etmeye başla..');
+  document.querySelector('.guess').value = '';
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.highscore').textContent = bestscore;
+  document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.number').style.width = '15rem';
+  document.querySelector('.check').ariaDisabled = false;
+  document.querySelector('.check').style.backgroundColor = '#eee';
+  document.querySelector('.number').textContent = '?';
 });
